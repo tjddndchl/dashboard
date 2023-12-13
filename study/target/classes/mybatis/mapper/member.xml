@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.future.my.member.dao.IMemberDAO">
+  <insert id="registMember" parameterType="com.future.my.member.vo.MemberVO">
+  	insert into member(
+	    mem_id
+	    ,mem_pw
+	    ,mem_nm
+	)VALUES(
+	     #{memId}
+	    ,#{memPw}
+	    ,#{memNm}
+	)
+  </insert>
+  
+  <select id="loginMember" parameterType="MemberVO" resultType="MemberVO">
+	  	SELECT
+		    mem_id,
+		    mem_pw,
+		    mem_nm,
+		    profile_img,
+		    addr
+		FROM member
+			where mem_id = #{memId}
+		<!--  	and mem_pw = #{memPw} -->
+		
+		
+  
+  </select>
+  
+	<update id="updateMember" parameterType="MemberVO" >  
+		UPDATE
+			member
+		SET
+			mem_pw = #{memPw}
+            ,mem_nm = #{memNm}
+		WHERE
+		 mem_id = #{memId}
+    </update>
+    
+	<delete id="deleteMember" parameterType="MemberVO">
+	    Delete
+        member
+    	where mem_id = #{memId}
+	</delete>
+	
+	<update id="profileUpload" parameterType="MemberVO">
+		UPDATE
+			member
+		SET profile_img = #{profileImg}
+		WHERE mem_id = #{memId}
+	</update>
+	
+
+</mapper>
